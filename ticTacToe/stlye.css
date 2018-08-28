@@ -1,0 +1,52 @@
+table{
+  display: inline-block;
+  position:absolute;
+  top:50%;
+  left:50%;
+  vertical-align: middle;
+  transform:translate(-50%,-50%);
+  border-collapse: collapse;
+}
+td{
+  border:2px solid #333;
+  height:100px;
+  width: 100px;
+  text-align: center;
+  font-size:70px;
+  cursor:pointer;
+}
+
+table tr:first-child td{
+  border-top:0;
+}
+
+table tr:last-child td{
+  border-bottom:0;
+}
+
+table tr td:first-child{
+  border-left:0;
+}
+
+table tr td:last-child{
+  border-right:0;
+}
+
+.endgame{
+  /*display:none;*/
+  width:200px;
+  top:50%;
+  background-color: lightgreen;
+  position:absolute;
+  left:50%;
+  /*margin-left:-100px;*/
+  padding-top: 50px;
+  padding-top:50px;
+  border-radius: 5px;
+  vertical-align: middle;
+  text-align: center;
+  font-size:2em;
+  color:white;
+  transform:translate(-50%,-50%);
+  opacity: 0.6;
+}
