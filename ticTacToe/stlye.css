@@ -33,7 +33,7 @@ table tr td:last-child{
 }
 
 .endgame{
-  /*display:none;*/
+  display:none;
   width:200px;
   top:50%;
   background-color: lightgreen;
