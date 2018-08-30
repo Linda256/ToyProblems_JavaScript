@@ -27,11 +27,38 @@ function startGame() {
   }
 
   function turnClick(square){
-    turn(square.target.id,huPlayer);
+    turn(square.target.id, huPlayer);
   }
 
-  function turn(squareId, player){
+
+  function turn(squareId, player){ //player is current player
     originalBoard[squareId]=player;
+    console.log("winComos.entries() ", winCombos.entries());
     document.getElementById(squareId).innerText = player;
+    let gameWon = checkWin(originalBoard,player);
+    if (gameWon) gameOver(gameWon);
+  }
+
+  function checkWin(board,player){
+    //find all the places on the board that already been played in.
+    let plays = board.reduce((a,e,i) =>
+      (e === player) ? a.concat(i) : a, [])
+    let gameWon = null;
+    for (let[index,win] of winCombos.entries()){
+      if(win.every(elem => plays.indexOf(elem) > -1)){
+        gameWon = {index: index, player: player};
+        break;
+      }
+    }
+    return gameWon;
+  }//a:accumulator-the result;e:element in the board array; i: index
+
+  function gameOver(gameWon){
+    for (let index of winCombos[gameWon.index]){
+      document.getElementById(index).style.backgroundColor = gameWon.player === huPlayer ? "blue" : "red";
+    }
+    for (let i=0; i<cells.length; i++){
+      cells[i].removeEventListener('click',turnClick,false);
+    }
   }
 }
