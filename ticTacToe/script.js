@@ -19,7 +19,7 @@ startGame();
 function startGame() {
   document.querySelector(".endgame").style.display = "none";
   originalBoard =Array.from(Array(9).keys());//make an array using array keys [0-9]
-  console.log(originalBoard);
+  //console.log(originalBoard);
   for (var i=0; i<cells.length; i++){
     cells[i].innerText ='';
     cells[i].style.removeProperty('background-color');
@@ -28,14 +28,16 @@ function startGame() {
 }
   function turnClick(square){
     if (typeof originalBoard[square.target.id] == 'number'){
-    turn(square.target.id, huPlayer);
-    if(!checkTie()) turn(bestSpot(),machinePlayer);
+      turn(square.target.id, huPlayer);
+      if(!checkWin(originalBoard,huPlayer) && !checkTie()){
+        turn(bestSpot(),machinePlayer);
+      }
     }
   }
 
   function turn(squareId, player){ //player is current player
     originalBoard[squareId]=player;
-    console.log("winComos.entries() ", winCombos.entries());
+    //console.log("winComos.entries() ", winCombos.entries());
     document.getElementById(squareId).innerText = player;
     let gameWon = checkWin(originalBoard,player);
     if (gameWon) gameOver(gameWon);
@@ -43,7 +45,7 @@ function startGame() {
 
  function declareWinner(who){
   document.querySelector(".endgame").style.display = "block";
-  document.querySelector(".endgame .text").innerText =who;
+  document.querySelector(".endgame .text").innerText = who;
 
  }
 
@@ -97,7 +99,7 @@ function startGame() {
   function minimax(newBoard,player){
     var availSpots = emptySquares(newBoard);
 
-    if (checkWin(newBoard,player)){
+    if (checkWin(newBoard,huPlayer)){
       return {score: -10};
     }else if (checkWin(newBoard,machinePlayer)){
       return {score: 10};
@@ -106,11 +108,16 @@ function startGame() {
     }
 
     var moves =[];
+    //loop through available spots
     for (var i=0; i< availSpots.length; i++){
+      //create an object for each and store the index of that spot
       var move ={};
       move.index = newBoard[availSpots[i]];
+
+      // set the emptyspot to the current player
       newBoard[availSpots[i]] = player;
 
+      // collect the score resulted from calling minimax on the opponent of the current player*/
       if (player === machinePlayer) {
         var result = minimax(newBoard, huPlayer);
         move.score = result.score;
@@ -122,6 +129,7 @@ function startGame() {
         moves.push(move);
       }
 
+      //if it is the computer's turn loop over the moves, choose the maximum score as the best move.
       var bestMove;
       if(player === machinePlayer){
         var bestScore = -10000;
@@ -131,7 +139,7 @@ function startGame() {
             bestMove = i;
           }
         }
-
+      //if it is the human's turn choose the minimum score as the best move.
       } else {
         var bestScore = 10000;
         for (var i=0; i< moves.length; i++){
