@@ -53,9 +53,15 @@ function readLine() {
     return inputString[currentLine++];
 }
 
-// Complete the diagonalDifference function below.
 function diagonalDifference(arr) {
-
+    let row = arr.length;
+    let diag1=0;
+    let diag2=0;
+    for (let i=0;i<row;i++){
+        diag1 +=arr[i][i];
+        diag2 +=arr[i][row-i-1];
+    }
+    return Math.abs(diag1-diag2);
 
 }
 
