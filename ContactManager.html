@@ -1,0 +1,28 @@
+<DOCTYPE html>
+<html ng-app>
+  <head>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+  </head>
+  <body>
+    <div ng-controller="ContractController">
+       Name<input type="text" ng-model="newcontact.name"/>
+       Email<input ng-model="newcontact.email"/>
+       Phone Number<input ng-model="newcontact.phoneNo"/>
+       <button ng-click="add()">Add</button>
+       <h3>Contact List</h3>
+       <ul>
+         <li ng-repeat="contact in contacts">Name: {{contact.name}} email: {{contact.email}} Phone Number: {{contact.phoneNo}}</li>
+       </ul>
+    </div>
+
+    <script>
+      function ContractController($scope){
+        $scope.contacts=[{name:'Mary',email:'mary@hotmail.com', phoneNo:'333-333'}];
+        $scope.add=function(){
+          $scope.contacts.push($scope.newcontact);
+          $scope.newcontact={};
+        }
+      }
+    </script>
+  </body>
+</html>
