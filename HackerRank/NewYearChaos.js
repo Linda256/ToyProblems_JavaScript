@@ -69,7 +69,7 @@ function minimumBribes(q) {
 //loop through q starting from the last element
 //if the element is greater than its index + 3 return (too chaotic)
 //if an element is greater than its index+1
-    //while it is greater than its indexkeep
+    //while it is greater than its index
         //swap it with the number at its right side
         //increase the count
     //set the index back 1 step to check curr item greater than its index+1 or not
