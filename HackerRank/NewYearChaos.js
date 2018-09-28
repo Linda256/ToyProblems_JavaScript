@@ -72,12 +72,11 @@ function minimumBribes(q) {
     //while it is greater than its indexkeep
         //swap it with the number at its right side
         //increase the count
-    //if it is swaped, set the index back 1 step to check curr item greater than its index+1 or not
+    //set the index back 1 step to check curr item greater than its index+1 or not
 //return count
 
     let count = 0;
     let len=q.length-1;
-    let swapped=false;
     for (let i=len;i>=0;i--){
       if (q[i]-i>3) return "Too chaotic";
       if (q[i]>i+1){
@@ -88,13 +87,10 @@ function minimumBribes(q) {
           q[j+1]=temp;
           j++;
           count++;
-          swapped=true;
-          console.log(q);
         }
-        if (swapped===true) i++;
+        i++;
       }
     }
-    //console.log(q);
     return count;
 }
 
