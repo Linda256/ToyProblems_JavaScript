@@ -57,7 +57,8 @@ function readLine() {
     return inputString[currentLine++];
 }
 
-// Complete the rotLeft function below.
+// method 1
+
 function rotLeft(a, d) {
     let len=a.length;
     let a1=[];
@@ -73,6 +74,16 @@ function rotLeft(a, d) {
     a=a1;
     return a;
 }
+//method 2
+function rotLeft2(a, d) {
+    let len=a.length;
+    if (d>=len) return a;
+    let a1=a.slice(0,d);
+    a=a.slice(d);
+    a.push(...a1)
+    return a;
+}
+
 
 function main() {
     const ws = fs.createWriteStream(process.env.OUTPUT_PATH);
