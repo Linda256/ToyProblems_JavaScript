@@ -14,7 +14,7 @@
    <script type="text/babel">
     var Words = React.createClass({
         render: function(){
-          return <ul>{this.props.sortedWords.map(wordArr =>  <WordItem word={wordArr[0]} font={wordArr[1]*2} />)}</ul>;
+          return <ul>{this.props.sortedWords.map(wordArr =>  <WordItem word={wordArr[0]} font={wordArr[1]*2} clickGoogle={this.props.clickGoogle}/>)}</ul>;
       }
     })
 
@@ -22,12 +22,22 @@
 
       render: function(){
 
-      return <li> <font size= {this.props.font}>{this.props.word}</font> </li>
+      return <li>
+        <a href = {this.props.clickGoogle()}>
+          <font size= {this.props.font}>{this.props.word}</font>
+        </a>
+       </li>
     }
     })
 
+
+  var searchCloud = function(){
+  let wordCloud = "https://www.google.com/search?q=wordcloud&source=lnms&tbm=isch&sa=X&ved=0ahUKEwiawNCk_7DdAhVTIzQIHZUZC-4Q_AUICigB&biw=1193&bih=640"
+  return wordCloud;
+}
+
     ReactDOM.render(
-     <Words sortedWords = {[ [ 'java', 3 ], [ 'python', 2 ], [ 'javascript', 1 ] ]}/>, document.getElementById('app'));
+     <Words sortedWords = {[ [ 'java', 3 ], [ 'python', 2 ], [ 'javascript', 1 ] ]} clickGoogle={searchCloud}/>, document.getElementById('app'));
    </script>
 </body>
 </html>
