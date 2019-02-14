@@ -42,11 +42,11 @@
       }
     }
   }
-  if(stack.length>0) return false;
-  return true;
+  return stack.length===0;
  }
 
- let input ='[](){}';
+ //let input ='[](){}';
  //let input=' var wow  = { yo: thisIsAwesome() }';
- //let input ='var hubble = function() { telescopes.awesome()';
+ let input ='var hubble = function() { telescopes.awesome()';
  console.log(balancedParens(input));
+
